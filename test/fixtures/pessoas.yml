@@ -1,0 +1,14 @@
+# test/fixtures/pessoas.yml
+# Dados para Pessoas
+
+luke:
+  first_name: "Luke"
+  last_name: "Skywalker"
+  address: "Fazenda de Umidade"
+  city: "Tatooine"
+
+leia:
+  first_name: "Leia"
+  last_name: "Organa"
+  address: "Palácio Real"
+  city: "Alderaan"

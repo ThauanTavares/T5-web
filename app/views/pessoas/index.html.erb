@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Personagens</h1>
+  <% if current_user&.admin? %>
+    <%= link_to "Novo Personagem", new_pessoa_path, class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Cidade</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pessoas.each do |pessoa| %>
+        <tr>
+          <td><%= pessoa.first_name %> <%= pessoa.last_name %></td>
+          <td><%= pessoa.city %></td>
+          <td><%= link_to "Ver Detalhes", pessoa, class: "btn btn-sm btn-info" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

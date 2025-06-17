@@ -1,0 +1,13 @@
+# test/fixtures/users.yml
+
+# Usuário comum (role: 0)
+one:
+  email: user@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  role: 0
+
+# Usuário administrador (role: 1)
+admin:
+  email: admin@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  role: 1

@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h3>Detalhes de <%= @pessoa.first_name %> <%= @pessoa.last_name %></h3>
+    <% if current_user&.admin? %>
+      <div>
+        <%= link_to "Editar", edit_pessoa_path(@pessoa), class: "btn btn-warning" %>
+        <%= button_to "Excluir", @pessoa, method: :delete, data: { turbo_confirm: 'Tem certeza?' }, class: "btn btn-danger d-inline" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="card-body">
+    <p><strong>Endereço:</strong> <%= @pessoa.address %></p>
+    <p><strong>Cidade:</strong> <%= @pessoa.city %></p>
+    
+    <hr>
+    
+    <h5>Documento</h5>
+    <p>
+      <% if @pessoa.documento.present? %>
+        <strong>Número:</strong> <%= @pessoa.documento.numero %>
+      <% else %>
+        <span class="text-muted">Sem documento cadastrado.</span>
+      <% end %>
+    </p>
+
+    <hr>
+
+    <h5>Cursos Inscritos (Relação N-para-N)</h5>
+    <% if @pessoa.cursos.any? %>
+      <ul class="list-group mb-3">
+        <% @pessoa.cursos.each do |curso| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= curso.nome %>
+            <% if current_user&.admin? %>
+              <% inscricao = @pessoa.inscricoes.find_by(curso_id: curso.id) %>
+              <%= button_to "Remover Inscrição", inscricao_path(inscricao), method: :delete, class: "btn btn-sm btn-outline-danger" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">Nenhum curso inscrito.</p>
+    <% end %>
+
+    <%# Formulário para adicionar novos cursos %>
+    <% if current_user&.admin? %>
+      <h5>Inscrever em novo curso</h5>
+      <%= form_with(model: @inscricao, url: inscricoes_path) do |form| %>
+        <%= form.hidden_field :pessoa_id %>
+        <div class="input-group">
+          <%= form.collection_select :curso_id, Curso.all, :id, :nome, { prompt: "Selecione um curso" }, { class: "form-select" } %>
+          <%= form.submit "Inscrever", class: "btn btn-success" %>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+  <div class="card-footer">
+    <%= link_to "Voltar para a lista", pessoas_path %>
+  </div>
+</div>

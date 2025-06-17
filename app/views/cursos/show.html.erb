@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h3>Curso: <%= @curso.nome %></h3>
+    <% if current_user&.admin? %>
+      <div>
+        <%= link_to "Editar", edit_curso_path(@curso), class: "btn btn-warning" %>
+        <%= button_to "Excluir", @curso, method: :delete, data: { turbo_confirm: 'Tem certeza?' }, class: "btn btn-danger d-inline" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Alunos Inscritos</h5>
+    <% if @curso.pessoas.any? %>
+      <ul class="list-group">
+        <% @curso.pessoas.each do |pessoa| %>
+          <li class="list-group-item">
+            <%= link_to pessoa.first_name, pessoa %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">Nenhum aluno inscrito neste curso.</p>
+    <% end %>
+  </div>
+  <div class="card-footer">
+    <%= link_to "Voltar para a lista de cursos", cursos_path %>
+  </div>
+</div>

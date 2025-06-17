@@ -1,0 +1,47 @@
+<%= form_with(model: pessoa, class: "needs-validation") do |form| %>
+    <% if pessoa.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(pessoa.errors.count, "error") %> prohibited this pessoa from being saved:</h2>
+        <ul>
+          <% pessoa.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="mb-3">
+      <%= form.label :first_name, "Nome", class: "form-label" %>
+      <%= form.text_field :first_name, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= form.label :last_name, "Sobrenome", class: "form-label" %>
+      <%= form.text_field :last_name, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= form.label :address, "Endereço", class: "form-label" %>
+      <%= form.text_field :address, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= form.label :city, "Cidade", class: "form-label" %>
+      <%= form.text_field :city, class: "form-control" %>
+    </div>
+    
+    <hr>
+  
+    <h5>Documento (Relação 1-para-1)</h5>
+    <%= form.fields_for :documento do |documento_form| %>
+      <div class="mb-3">
+        <%= documento_form.label :numero, "Número do Documento", class: "form-label" %>
+        <%= documento_form.text_field :numero, class: "form-control" %>
+      </div>
+    <% end %>
+  
+  
+    <div class="d-grid gap-2">
+      <%= form.submit "Salvar", class: "btn btn-primary" %>
+    </div>
+  <% end %>

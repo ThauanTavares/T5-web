@@ -1,0 +1,10 @@
+# test/fixtures/inscricoes.yml
+# Dados para a tabela de junção entre Pessoas e Cursos
+
+luke_jedi:
+  pessoa: luke
+  curso: jedi
+
+leia_jedi:
+  pessoa: leia
+  curso: jedi

@@ -1,0 +1,8 @@
+# test/fixtures/cursos.yml
+# Dados para Cursos
+
+jedi:
+  nome: Jedi
+
+sith:
+  nome: Sith

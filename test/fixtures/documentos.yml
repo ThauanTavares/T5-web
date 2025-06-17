@@ -1,0 +1,9 @@
+# test/fixtures/documentos.yml
+
+doc_luke:
+  numero: "DOC-001"
+  pessoa: luke  # Associa este documento à pessoa 'luke'
+
+doc_leia:
+  numero: "DOC-002"
+  pessoa: leia  # Associa este documento à pessoa 'leia'
